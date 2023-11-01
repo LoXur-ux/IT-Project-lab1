@@ -32,7 +32,11 @@ const server = http.createServer((req, res) => {
   res.setHeader("Content-Type", "text/plain");
   res.write(`Hello World, started at ${createdAt.toISOString()}`);
 
-  pool.query("select * from Test", (err, qres) => {
+  pool.query(
+    `insert into "Test" values (default, default, \'${new Date().toISOString()}:request\')`
+  );
+
+  pool.query('select * from "Test"', (err, qres) => {
     if (err) throw err;
     qres.rows.forEach((row) => {
       res.write(
