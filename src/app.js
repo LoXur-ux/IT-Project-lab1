@@ -30,7 +30,7 @@ const server = http.createServer((req, res) => {
   res.statusCode = 200;
 
   res.setHeader("Content-Type", "text/plain");
-  res.write(`Hello World, started at ${createdAt.toISOString()}`);
+  res.write(`Hello World, started at ${createdAt.toISOString()}`, "utf-8");
 
   pool.query(
     `insert into "Test" values (default, default, \'${new Date().toISOString()}:request\')`,
@@ -43,12 +43,12 @@ const server = http.createServer((req, res) => {
     if (err) throw err;
     qres.rows.forEach((row) => {
       res.write(
-        "id: " + row.id + "| date: " + row.date + "| title: " + row.title
+        "id: " + row.id + "| date: " + row.date + "| title: " + row.title,
+        "utf-8"
       );
     });
+    res.end("А все", "utf-8");
   });
-
-  res.end("А все");
 });
 
 server.listen(port, () => {

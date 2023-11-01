@@ -1,6 +1,6 @@
 docker-compose down
 docker-compose rm 
-docker rmi server-1:latest
+docker rmi lab1docker-server:latest
 
 git pull
 
